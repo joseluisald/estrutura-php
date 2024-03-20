@@ -1,0 +1,33 @@
+:root,
+[data-theme=light]
+{
+    --kt-primary: #9ab41c;
+    --kt-text-primary: #9ab41c;
+    --kt-ribbon-label-bg: #9ab41c;
+    --kt-ribbon-label-border-color: #708316;
+    --kt-primary-active: #708316;
+
+    --kt-menu-link-color-hover: #708316;
+    --kt-menu-link-color-show: #708316;
+    --kt-menu-link-color-here: #708316;
+    --kt-menu-link-color-active: #708316;
+
+    --kt-link-color: #9ab41c;
+    --kt-link-hover-color: #708316;
+    --kt-component-active-bg: #9ab41c;
+    --kt-component-hover-color: #9ab41c;
+    --kt-component-checked-bg: #9ab41c;
+
+    --kt-form-check-input-checked-bg-color: #9ab41c;
+    --kt-form-check-input-checked-bg-color-solid: #9ab41c;
+    --kt-form-check-input-checked-border-color: #9ab41c;
+
+    --tagify-dd-color-primary: rgb(154, 180, 28);
+    --bs-primary-rgb: 154, 180, 28;
+
+    --kt-pagination-active-bg: #9ab41c;
+    --kt-pagination-focus-color: #9ab41c;
+    --kt-pagination-hover-color: #9ab41c;
+    --kt-dropdown-link-active-bg: #9ab41c;
+    --kt-nav-pills-link-active-bg: #9ab41c;
+}

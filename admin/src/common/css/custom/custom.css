@@ -1,0 +1,40 @@
+#kt_app_sidebar_menu_wrapper .menu-item {
+    font-size: 16px;
+}
+
+#kt_app_sidebar_menu_wrapper .menu-item i {
+    font-size: 22px;
+}
+
+::-webkit-scrollbar
+{
+    width: 5px;
+    height: 7px;
+    transition: .3s linear;
+}
+
+@media (max-width: 760px)
+{
+    ::-webkit-scrollbar
+    {
+        display: none;
+    }
+}
+
+::-webkit-scrollbar-button
+{
+    display: none;
+}
+
+::-webkit-scrollbar-track
+{
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb
+{
+    background: #ec7f00;
+    border: none;
+    border-radius: 10px;
+    transition: .3s linear;
+}

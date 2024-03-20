@@ -25,14 +25,14 @@ Thumbs.db
 *.mov
 *.wmv
 
-/*/logs/
+logs/
 
-/*/assets/*/css/
-/*/assets/*/js/
-/*/assets/*/images/cache/
-!/*/assets/common/css/
-!/*/assets/common/js/
+assets/*/css/
+assets/*/js/
+assets/*/images/cache/
+!assets/common/css/
+!assets/common/js/
 
 /packages
 /.vs
-/*/vendor/
+vendor/
