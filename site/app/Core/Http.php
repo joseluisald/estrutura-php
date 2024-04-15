@@ -43,6 +43,13 @@ class Http
 			CURLOPT_POSTFIELDS => json_encode($data),
 			CURLOPT_HTTPHEADER => $httpHeader,
 		));
+		
+		if (CURL_LOG)
+		{
+			$fp = fopen(dirname(__DIR__, 2).'/logs/curl/post.txt', 'w');
+			curl_setopt($curl, CURLOPT_VERBOSE, true);
+			curl_setopt($curl, CURLOPT_STDERR, $fp);
+		}
 
 		$response = curl_exec($curl);
 		$responseCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
@@ -57,8 +64,10 @@ class Http
 			$logData = new \stdClass();
 			$logData->url = $url;
 			$logData->runtime = $runtime;
+			$logData->data = json_encode($data);
+			$logData->error = $error;
 
-			$log = (new Log("Http POST Request", $logData))->saveLog();
+			(new Log("Http POST Request", $logData))->saveLog();
 		}
 
 		return $this->validateReturn($response, $responseCode);
@@ -157,10 +166,18 @@ class Http
 			CURLOPT_SSL_VERIFYHOST => false,
 			CURLOPT_SSL_VERIFYPEER => false
 		));
+		
+		if (CURL_LOG)
+		{
+			$fp = fopen(dirname(__DIR__, 2).'/logs/curl/get.txt', 'w');
+			curl_setopt($curl, CURLOPT_VERBOSE, true);
+			curl_setopt($curl, CURLOPT_STDERR, $fp);
+		}
 
 		$response = curl_exec($curl);
 		$responseCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		$runtime = curl_getinfo($curl, CURLINFO_TOTAL_TIME);
+		$error = curl_error($curl);
 
 		curl_close($curl);
 
@@ -170,8 +187,9 @@ class Http
 			$logData = new \stdClass();
 			$logData->url = $url . $queryParams;
 			$logData->runtime = $runtime;
+			$logData->error = $error;
 
-			$log = (new Log("Http GET Request", $logData))->saveLog();
+			(new Log("Http GET Request", $logData))->saveLog();
 		}
 
 		return $this->validateReturn($response, $responseCode);
@@ -240,64 +258,6 @@ class Http
 
 	/**
 	 * @param $url
-	 * @param string|null $token
-	 * @param array|null $data
-	 * @param string|null $contentType
-	 * @return mixed
-	 */
-	public function getVimeo($url, string $token = null, array $data = null, string $contentType = null)
-	{
-		$curl = curl_init();
-
-		$httpHeader = array();
-
-		if ($token)
-			$httpHeader[] = 'Authorization: Bearer ' . $token;
-
-		if ($contentType)
-			$httpHeader[] = 'Content-Type: ' . $contentType;
-
-		if (!empty($data)) {
-			$queryParams = http_build_query($data, '', '&');
-			$queryParams = "?" . str_replace("_", ".", $queryParams);
-		} else
-			$queryParams = "";
-
-		curl_setopt_array($curl, array(
-			CURLOPT_URL => $url . $queryParams,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_ENCODING => '',
-			CURLOPT_MAXREDIRS => 10,
-			CURLOPT_TIMEOUT => 0,
-			CURLOPT_FOLLOWLOCATION => true,
-			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => 'GET',
-			CURLOPT_HTTPHEADER => $httpHeader,
-			CURLOPT_SSL_VERIFYHOST => false,
-			CURLOPT_SSL_VERIFYPEER => false
-		));
-
-		$response = curl_exec($curl);
-		$responseCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-		$runtime = curl_getinfo($curl, CURLINFO_TOTAL_TIME);
-
-		curl_close($curl);
-
-		$response = json_decode($response);
-
-		if (LOG_CURL) {
-			$logData = new \stdClass();
-			$logData->url = $url . $queryParams;
-			$logData->runtime = $runtime;
-
-			$log = (new Log("Http GET Request", $logData))->saveLog();
-		}
-
-		return $response;
-	}
-
-	/**
-	 * @param $url
 	 * @param array $data
 	 * @param string|null $token
 	 * @param $type
@@ -328,10 +288,18 @@ class Http
 			CURLOPT_POSTFIELDS => json_encode($data),
 			CURLOPT_HTTPHEADER => $httpHeader,
 		));
+		
+		if (CURL_LOG)
+		{
+			$fp = fopen(dirname(__DIR__, 2).'/logs/curl/delete.txt', 'w');
+			curl_setopt($curl, CURLOPT_VERBOSE, true);
+			curl_setopt($curl, CURLOPT_STDERR, $fp);
+		}
 
 		$response = curl_exec($curl);
 		$responseCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		$runtime = curl_getinfo($curl, CURLINFO_TOTAL_TIME);
+		$error = curl_error($curl);
 
 		curl_close($curl);
 
@@ -341,8 +309,10 @@ class Http
 			$logData = new \stdClass();
 			$logData->url = $url;
 			$logData->runtime = $runtime;
+			$logData->data = json_encode($data);
+			$logData->error = $error;
 
-			$log = (new Log("Http PUT Request", $logData))->saveLog();
+			(new Log("Http PUT Request", $logData))->saveLog();
 		}
 
 		return $this->validateReturn($response, $responseCode);
@@ -371,13 +341,22 @@ class Http
 			CURLOPT_TIMEOUT => 0,
 			CURLOPT_FOLLOWLOCATION => true,
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_SSL_VERIFYPEER => false,
 			CURLOPT_CUSTOMREQUEST => 'DELETE',
 			CURLOPT_HTTPHEADER => $httpHeader,
 		));
+		
+		if (CURL_LOG)
+		{
+			$fp = fopen(dirname(__DIR__, 2).'/logs/curl/delete.txt', 'w');
+			curl_setopt($curl, CURLOPT_VERBOSE, true);
+			curl_setopt($curl, CURLOPT_STDERR, $fp);
+		}
 
 		$response = curl_exec($curl);
 		$responseCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		$runtime = curl_getinfo($curl, CURLINFO_TOTAL_TIME);
+		$error = curl_error($curl);
 
 		curl_close($curl);
 
@@ -387,8 +366,9 @@ class Http
 			$logData = new \stdClass();
 			$logData->url = $url;
 			$logData->runtime = $runtime;
+			$logData->error = $error;
 
-			$log = (new Log("Http DELETE Request", $logData))->saveLog();
+			(new Log("Http DELETE Request", $logData))->saveLog();
 		}
 
 		return $this->validateReturn($response, $responseCode);

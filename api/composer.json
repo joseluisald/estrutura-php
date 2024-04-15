@@ -10,7 +10,8 @@
 		"padaliyajay/php-autoprefixer": "^1.4",
 		"coffeecode/datalayer": "^2.0",
 		"zircote/swagger-php": "^4.8",
-		"doctrine/annotations": "^2.0"
+		"doctrine/annotations": "^2.0",
+      	"ext-curl": "*"
     },
 	"license": "MIT",
 	"authors": [

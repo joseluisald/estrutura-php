@@ -46,6 +46,7 @@ define("API", [
 
 define("LOG_CURL", $logCurl);
 define("SHOW_ERROR", $showError);
+define("CURL_LOG", false);
 define('DS', DIRECTORY_SEPARATOR);
 
 function isHttps()
