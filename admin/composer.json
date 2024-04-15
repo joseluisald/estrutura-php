@@ -1,6 +1,6 @@
 {
-	"name": "marketmediadev/borelli-admin",
-	"description": "Painel Administrativo Borelli",
+	"name": "joseluisald/estrutura-php",
+	"description": "Estrutura PHP Admin",
 	"type": "project",
 	"require": {
 		"coffeecode/router": "2.0.2",
@@ -27,8 +27,8 @@
 	"license": "MIT",
 	"authors": [
 		{
-			"name": "Walter Pinheiro",
-			"email": "walter@marketmedia.com.br"
+			"name": "José Luis Aldrighi",
+			"email": "jose.luis@marketmedia.com.br"
 		}
 	],
 	"minimum-stability": "stable",
